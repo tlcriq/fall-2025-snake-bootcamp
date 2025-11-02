@@ -1,15 +1,25 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { io, Socket } from "socket.io-client";
 
 const HEADER_HEIGHT_PX = 64;
+
+type Point = {x : number; y : number}
+type GameState = {
+  snake: Point[];
+  food: Point;
+}
 
 export default function Home() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const socketRef = useRef<Socket | undefined>(undefined);
 
   // TODO: variables for tracking the snake attributes
+  const [gameState, setGameState] = useState<GameState>({
+    snake: [{x: 0, y: 0}],
+    food: {x: 0,y: 0}
+  });
 
   useEffect(() => {
     if (socketRef.current === undefined) {
@@ -18,11 +28,13 @@ export default function Home() {
       const onConnect = () => {
         socketRef.current?.emit("start_game", {
           // TODO: data about initial game setup
+          
         });
       };
 
       const onUpdate = (data: unknown) => {
         // TODO: update the snake and food state based on data from server
+
       };
 
       socketRef.current.on("connect", onConnect);
@@ -84,7 +96,7 @@ export default function Home() {
       />
       <div className="absolute rounded-lg p-8 w-fit flex flex-col items-center shadow-md backdrop-blur-md bg-background-trans">
         <span className="text-primary text-3xl font-extrabold mb-2 text-center">
-          CSAI Student
+          Tate Criqui
         </span>
       </div>
     </div>
