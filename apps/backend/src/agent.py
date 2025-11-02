@@ -31,6 +31,7 @@ class DQN:
 
         pass
 
+    
     def get_state(self, game: "Game") -> List[float]:
         """
         Extract the current state of the game as input features for the neural network.
@@ -42,7 +43,9 @@ class DQN:
         - Current snake direction
         """
         # TODO: Get the snake's head position
+        head = game.snake.body[0]
         # TODO: Helper function to normalize distances
+
         # TODO: Get current direction as one-hot encoding
 
         # TODO: Detect dangers in three directions relative to current direction
